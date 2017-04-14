@@ -1,0 +1,98 @@
+apply plugin: 'java'
+apply plugin : 'war'
+apply plugin : 'eclipse-wtp'
+apply plugin: 'idea'
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+	
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+//for eclipse IDE only
+eclipse{
+  wtp{
+    component{
+      contextPath = "${CONTEXT_PATH}"
+    }
+  }
+}
+
+//改变包的名称
+war {
+  archiveName = "${CONTEXT_PATH}.war";
+}
+
+		
+repositories {
+  mavenLocal()
+  mavenCentral()
+}
+
+dependencies {
+	compile(
+		'org.hamcrest:hamcrest-core:1.3',
+		'org.hamcrest:hamcrest-library:1.3',
+		'junit:junit:4.12',
+		
+		'commons-logging:commons-logging:1.2',
+		"commons-fileupload:commons-fileupload:1.3.1",
+		"commons-codec:commons-codec:1.10",
+		"commons-io:commons-io:2.5",
+		'commons-lang:commons-lang:2.5',
+		'commons-beanutils:commons-beanutils:1.8.0',
+		'commons-collections:commons-collections:3.2.1',
+		'net.sf.ezmorph:ezmorph:1.0.6',
+		
+		'log4j:log4j:1.2.17',
+		'org.slf4j:slf4j-api:1.7.12',
+		'org.slf4j:slf4j-log4j12:1.7.12',
+		
+		'javax.servlet:javax.servlet-api:3.1.0',
+		'javax.servlet.jsp:javax.servlet.jsp-api:2.3.1',
+		'javax.servlet:jstl:1.2',
+		
+		"com.alibaba:fastjson:1.2.7",
+		"net.sf.json-lib:json-lib:${json_lib_version}",
+		"com.google.code.gson:gson:${gson_version}",
+		"com.hynnet:json-lib:2.4",
+		
+		"org.springframework:spring-webmvc:${spring_mvc_version}",
+		"org.springframework:spring-context:${spring_mvc_version}",
+		"org.springframework:spring-context-support:${spring_mvc_version}",
+		"org.springframework:spring-jdbc:${spring_mvc_version}",
+		"org.springframework:spring-aop:${spring_mvc_version}",
+		"org.springframework:spring-aspects:${spring_mvc_version}",
+		
+		"org.mybatis:mybatis-spring:${mybatis_spring_version}",
+		"org.mybatis:mybatis:${mybatis_version}",
+		"mysql:mysql-connector-java:${mysql_version}",
+		"org.apache.tomcat:tomcat-jdbc:${tomcat_jdbc_version}",
+		
+		"com.squareup.okhttp3:okhttp:${okhttp_version}",
+		
+		"org.apache.shiro:shiro-core:${shiro_version}",
+		"org.apache.shiro:shiro-web:${shiro_version}",
+		"org.apache.shiro:shiro-spring:${shiro_version}",
+		
+		"org.apache.lucene:lucene-core:${lucene_version}",
+		"org.apache.lucene:lucene-analyzers-smartcn:${lucene_version}",
+		"org.apache.lucene:lucene-analyzers-common:${lucene_version}",
+		"org.apache.lucene:lucene-queryparser:${lucene_version}",
+		"org.apache.lucene:lucene-highlighter:${lucene_version}",
+		
+		"com.alibaba:druid:${druid_version}",
+		"org.jsoup:jsoup:${jsoup_version}",
+		"com.sun.mail:javax.mail:${mail_version}"
+		
+	)
+	testCompile(
+  	"org.springframework:spring-test:${spring_mvc_version}"
+  )
+}
+		
+idea {
+	module {
+		downloadJavadoc = false
+		downloadSources = true
+	}
+}
